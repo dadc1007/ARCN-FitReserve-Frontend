@@ -20,4 +20,11 @@ export const userService = {
     );
     return data.data;
   },
+
+  async getUserById(id: string): Promise<UserResponse> {
+    const { data } = await httpClient.get<ApiResponse<UserResponse>>(
+      `${USERS_ROUTE}/${id}`,
+    );
+    return data.data;
+  },
 };

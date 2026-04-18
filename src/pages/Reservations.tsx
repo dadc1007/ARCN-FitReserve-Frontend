@@ -19,11 +19,15 @@ export default function Reservations() {
   >(null);
 
   const handleCancel = async (reservationId: string) => {
+    if (!user) {
+      return;
+    }
+
     setCancellingReservationId(reservationId);
 
     await sileo.promise(
       cancelReservationMutation
-        .mutateAsync(reservationId)
+        .mutateAsync({ reservationId, userId: user.id })
         .then(() => refetch())
         .finally(() => {
           setCancellingReservationId(null);

@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
+import { queryClient } from "@api/queryClient";
 import { gymClassService } from "@services/gymClass.service";
 import type { CreateGymClassRequest } from "@contracts/request/gym-class.request";
 import type { GymClassResponse } from "@contracts/response/gym-class.response";

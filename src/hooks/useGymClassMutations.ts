@@ -1,9 +1,20 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
 import { gymClassService } from "@services/gymClass.service";
 import type { CreateGymClassRequest } from "@contracts/request/gym-class.request";
 import type { GymClassResponse } from "@contracts/response/gym-class.response";
+
+export const gymClassQueryKeys = {
+  all: ["classes"] as const,
+};
+
+export const useGymClassesQuery = () => {
+  return useQuery<GymClassResponse[], AxiosError>({
+    queryKey: gymClassQueryKeys.all,
+    queryFn: gymClassService.getAllGymClasses,
+  });
+};
 
 export const useCreateGymClassMutation = () => {
   return useMutation<GymClassResponse, AxiosError, CreateGymClassRequest>({

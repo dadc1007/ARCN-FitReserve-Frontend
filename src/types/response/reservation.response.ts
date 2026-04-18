@@ -1,4 +1,4 @@
-import type { ReservationStatus } from "@/types/reservationStatus";
+import type { ReservationStatus } from "@contracts/reservation-status";
 
 export interface ReservationResponse {
   id: string;

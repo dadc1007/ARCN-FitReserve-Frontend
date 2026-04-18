@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
 import { gymClassService } from "@services/gymClass.service";
-import type { CreateGymClassRequest } from "@contracts/request/gymClass.request";
-import type { GymClassResponse } from "@contracts/response/gymClass.response";
+import type { CreateGymClassRequest } from "@contracts/request/gym-class.request";
+import type { GymClassResponse } from "@contracts/response/gym-class.response";
 
 export const useCreateGymClassMutation = () => {
   return useMutation<GymClassResponse, AxiosError, CreateGymClassRequest>({

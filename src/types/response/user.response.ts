@@ -1,4 +1,4 @@
-import type { UserRole } from "@/types/userRole";
+import type { UserRole } from "@contracts/user-role";
 
 export interface UserResponse {
   id: string;

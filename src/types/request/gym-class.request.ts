@@ -1,4 +1,4 @@
-import type { ClassType } from "@/types/classType";
+import type { ClassType } from "@contracts/class-type";
 
 export interface CreateGymClassRequest {
   name: string;

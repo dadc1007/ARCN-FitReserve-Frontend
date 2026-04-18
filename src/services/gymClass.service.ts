@@ -1,7 +1,7 @@
 import { httpClient } from "@api/httpClient";
-import type { CreateGymClassRequest } from "@contracts/request/gymClass.request";
+import type { CreateGymClassRequest } from "@contracts/request/gym-class.request";
 import type { ApiResponse } from "@contracts/response/api.response";
-import type { GymClassResponse } from "@contracts/response/gymClass.response";
+import type { GymClassResponse } from "@contracts/response/gym-class.response";
 
 const CLASSES_ROUTE = "/classes";
 

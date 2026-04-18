@@ -1,5 +1,8 @@
 import { httpClient } from "@api/httpClient";
-import type { CreateUserRequest } from "@contracts/request/user.request";
+import type {
+  CreateUserRequest,
+  LoginRequest,
+} from "@contracts/request/user.request";
 import type { ApiResponse } from "@contracts/response/api.response";
 import type { UserResponse } from "@contracts/response/user.response";
 
@@ -14,15 +17,16 @@ export const userService = {
     return data.data;
   },
 
-  async deactivateUser(id: string): Promise<string> {
-    const { data } = await httpClient.delete<ApiResponse<string>>(
-      `${USERS_ROUTE}/${id}`,
+  async login(payload: LoginRequest): Promise<UserResponse> {
+    const { data } = await httpClient.post<ApiResponse<UserResponse>>(
+      `${USERS_ROUTE}/login`,
+      payload,
     );
     return data.data;
   },
 
-  async getUserById(id: string): Promise<UserResponse> {
-    const { data } = await httpClient.get<ApiResponse<UserResponse>>(
+  async deactivateUser(id: string): Promise<string> {
+    const { data } = await httpClient.delete<ApiResponse<string>>(
       `${USERS_ROUTE}/${id}`,
     );
     return data.data;

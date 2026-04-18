@@ -21,7 +21,7 @@ const Signup = () => {
         password,
         role: "USER",
       }).then(() => {
-        navigate("/protected", { replace: true });
+        navigate("/classes", { replace: true });
       }),
       {
         loading: { title: "Creating account..." },

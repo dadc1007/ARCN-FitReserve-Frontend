@@ -17,7 +17,7 @@ const Login = () => {
   }) => {
     await sileo.promise(
       login({ email, password }).then(() => {
-        navigate("/protected", { replace: true });
+        navigate("/classes", { replace: true });
       }),
       {
         loading: { title: "Signing in..." },

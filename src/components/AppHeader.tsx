@@ -27,6 +27,9 @@ export default function AppHeader() {
           </div>
         </div>
         <div className="flex gap-3">
+          <Button onPress={() => navigate("/classes")} variant="tertiary">
+            Classes
+          </Button>
           <Button onPress={() => navigate("/reservations")} variant="tertiary">
             Reservations
           </Button>

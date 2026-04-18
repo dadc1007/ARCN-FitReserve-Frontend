@@ -11,6 +11,11 @@ export const reservationQueryKeys = {
   byUser: (userId: string) => ["reservations", "user", userId] as const,
 };
 
+interface CancelReservationVariables {
+  reservationId: string;
+  userId: string;
+}
+
 export const useCreateReservationMutation = () => {
   return useMutation<ReservationResponse, AxiosError, CreateReservationRequest>(
     {
@@ -28,11 +33,15 @@ export const useCreateReservationMutation = () => {
 };
 
 export const useCancelReservationMutation = () => {
-  return useMutation<string, AxiosError, string>({
-    mutationFn: reservationService.cancelReservation,
-    onSuccess: async () => {
+  return useMutation<string, AxiosError, CancelReservationVariables>({
+    mutationFn: ({ reservationId }) =>
+      reservationService.cancelReservation(reservationId),
+    onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({
-        queryKey: ["classes", "available"],
+        queryKey: gymClassQueryKeys.availableByUser(variables.userId),
+      });
+      await queryClient.invalidateQueries({
+        queryKey: reservationQueryKeys.byUser(variables.userId),
       });
     },
   });

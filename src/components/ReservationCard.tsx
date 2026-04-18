@@ -16,6 +16,15 @@ export default function ReservationCard({
 }: ReservationCardProps) {
   const isActive = reservation.status === "ACTIVE";
 
+  const formatTime = (value: string | null) => {
+    if (!value) return "-";
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
   const headerLeft = <h3 className="font-semibold">Reservation</h3>;
 
   const headerRight = (
@@ -32,13 +41,14 @@ export default function ReservationCard({
 
   const content = (
     <div className="text-sm text-slate-600">
+      <p className="font-medium text-slate-800">{reservation.className ?? "Gym class"}</p>
       <p>
-        <span className="font-medium text-slate-700">Class ID:</span>{" "}
-        {reservation.classId}
+        <span className="font-medium text-slate-700">Start:</span>{" "}
+        {formatTime(reservation.startTime)}
       </p>
       <p>
-        <span className="font-medium text-slate-700">Reservation ID:</span>{" "}
-        {reservation.id}
+        <span className="font-medium text-slate-700">End:</span>{" "}
+        {formatTime(reservation.endTime)}
       </p>
     </div>
   );

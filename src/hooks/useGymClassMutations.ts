@@ -6,13 +6,15 @@ import type { CreateGymClassRequest } from "@contracts/request/gym-class.request
 import type { GymClassResponse } from "@contracts/response/gym-class.response";
 
 export const gymClassQueryKeys = {
-  all: ["classes"] as const,
+  availableByUser: (userId: string) =>
+    ["classes", "available", userId] as const,
 };
 
-export const useGymClassesQuery = () => {
+export const useAvailableGymClassesByUserQuery = (userId: string) => {
   return useQuery<GymClassResponse[], AxiosError>({
-    queryKey: gymClassQueryKeys.all,
-    queryFn: gymClassService.getAllGymClasses,
+    queryKey: gymClassQueryKeys.availableByUser(userId),
+    queryFn: () => gymClassService.getAvailableGymClassesByUser(userId),
+    enabled: Boolean(userId),
   });
 };
 

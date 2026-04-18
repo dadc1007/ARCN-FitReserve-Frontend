@@ -6,9 +6,15 @@ import type { GymClassResponse } from "@contracts/response/gym-class.response";
 const CLASSES_ROUTE = "/classes";
 
 export const gymClassService = {
-  async getAllGymClasses(): Promise<GymClassResponse[]> {
-    const { data } =
-      await httpClient.get<ApiResponse<GymClassResponse[]>>(CLASSES_ROUTE);
+  async getAvailableGymClassesByUser(
+    userId: string,
+  ): Promise<GymClassResponse[]> {
+    const { data } = await httpClient.get<ApiResponse<GymClassResponse[]>>(
+      CLASSES_ROUTE,
+      {
+        params: { userId },
+      },
+    );
     return data.data;
   },
 
